@@ -4,4 +4,12 @@
   <artifactId>treasure.map</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>TreasureMap</name>
+  <dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.9.1</version>
+        <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>
