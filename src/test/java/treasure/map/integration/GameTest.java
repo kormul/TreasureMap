@@ -179,10 +179,10 @@ public class GameTest {
 		Game.initGame(data);
 		Game.game.play();
 		String res = Game.resultat();
-		assertTrue(res.equals("C - 3 - 4\r\n"
-					+ "M - 1 - 0\r\n"
-					+ "M - 2 - 1\r\n"
-					+ "T - 1 - 3 - 2\r\n"
-					+ "A - Lara - 0 - 3 - S - 3"));
+		assertTrue(res.equals("C - 3 - 4\n"
+					+ "M - 1 - 0\n"
+					+ "M - 2 - 1\n"
+					+ "T - 1 - 3 - 2\n"
+					+ "A - Lara - 0 - 3 - S - 3\n"));
 	}
 }
