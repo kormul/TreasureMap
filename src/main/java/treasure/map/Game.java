@@ -3,6 +3,8 @@ package treasure.map;
 import java.util.ArrayList;
 import java.util.List;
 
+import treasure.map.Map.Cell;
+
 public class Game {
 	
 	public static Game game;
@@ -97,4 +99,33 @@ public class Game {
 		}
 		
 	}
+
+	public static String resultat() {
+		
+		String res = "";
+		res += "C - "+game.map.getPlan().length+" - "+game.map.getPlan()[0].length+"\n";
+		for(int i = 0; i< game.map.getPlan().length; i++) {
+			for(int j = 0; j<game.map.getPlan()[i].length; j++) {
+				if(game.map.getPlan()[i][j].isMontain()) {
+					res += "M - "+i+" - "+j+"\n";
+				}
+			}
+		}
+		
+		for(int i = 0; i< game.map.getPlan().length; i++) {
+			for(int j = 0; j<game.map.getPlan()[i].length; j++) {
+				if(game.map.getPlan()[i][j].getNbTreasure()>0) {
+					res += "T - "+i+" - "+j+" - "+game.map.getPlan()[i][j].getNbTreasure()+"\n";
+				}
+			}
+		}
+		
+		for(Adventurer adventurer : game.getAdventurers()){
+			res += "A - "+adventurer.getName()+" - "+adventurer.getPositionX()+" - "+adventurer.getPositionY()+" - "+adventurer.getOrientation().toString().substring(0, 1)+" - "+adventurer.getNbTreasure()+"\n";
+
+		}
+		
+		return res;
+	}
+	
 }

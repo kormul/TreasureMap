@@ -120,6 +120,10 @@ public class Map {
 		}
 	}
 	
+	public Cell[][] getPlan() {
+		return plan;
+	}
+
 	class Cell {
 		
 		private int nbTreasure;
@@ -131,6 +135,14 @@ public class Map {
 		public Cell() {
 			this.nbTreasure = 0;
 			this.isMontain = false;
+		}
+
+		public int getNbTreasure() {
+			return nbTreasure;
+		}
+
+		public boolean isMontain() {
+			return isMontain;
 		}
 	}
 

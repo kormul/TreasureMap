@@ -11,8 +11,8 @@ public class Main {
 			List<String> file = ReadFile.instruction("Entree.txt");
 			Game.initGame(file);
 			Game.game.play();
-			Game a = Game.game;
-			System.out.println(Game.game.getAdventurers().get(0).getNbTreasure());
+			String res = Game.resultat();
+			SaveFile.saveFile(res);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
