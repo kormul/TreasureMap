@@ -1,5 +1,6 @@
 package treasure.map;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -9,10 +10,14 @@ public class Game {
 	private Map map;
 	private List<Adventurer> adventurers;
 	
-	public Game(Map map, List<Adventurer> adventurers) {
+	public Game(Map map) {
 		this.map = map;
-		this.adventurers = adventurers;
+		this.adventurers = new ArrayList<>();
 		Game.game = this;
+	}
+	
+	public void addAdventurer(Adventurer adventurer) {
+		adventurers.add(adventurer);
 	}
 	
 	public void play() {
@@ -34,18 +39,7 @@ public class Game {
 		return map;
 	}
 
-	public void setMap(Map map) {
-		this.map = map;
-	}
-
 	public List<Adventurer> getAdventurers() {
 		return adventurers;
 	}
-
-	public void setAdventurers(List<Adventurer> adventurers) {
-		this.adventurers = adventurers;
-	}
-
-	
-	
 }

@@ -9,7 +9,7 @@ public class Map {
 		if(x <= 0 || y<= 0) {
 			throw new IllegalArgumentException("La carte dois faire au minimum 1*1");
 		}
-		plan = new Cell[y][x];
+		plan = new Cell[x][y];
 		
 		for(int i = 0; i< plan.length; i++) {
 			for(int j = 0; j<plan[i].length; j++) {
@@ -19,10 +19,10 @@ public class Map {
 	}
 	
 	public void addMontain(int x, int y) {
-		if(y<plan.length && x<plan[y].length && x>=0 && y>=0) {
-			if(!plan[y][x].isMontain) {
-				if(plan[y][x].nbTreasure == 0) {
-					plan[y][x].isMontain = true;
+		if(x<plan.length && x>=0 && y>=0 && y<plan[x].length) {
+			if(!plan[x][y].isMontain) {
+				if(plan[x][y].nbTreasure == 0) {
+					plan[x][y].isMontain = true;
 				}
 				else {
 					throw new IllegalStateException("Des trésors sont présent à cette endroit");
@@ -39,9 +39,9 @@ public class Map {
 	}
 	
 	public void addTreasure(int x, int y, int nbTreasure) {
-		if(y<plan.length && x<plan[y].length && x>=0 && y>=0) {
-			if(!plan[y][x].isMontain) {
-				plan[y][x].nbTreasure += nbTreasure;
+		if(x<plan.length && x>=0 && y>=0 && y<plan[x].length) {
+			if(!plan[x][y].isMontain) {
+				plan[x][y].nbTreasure += nbTreasure;
 			}
 			else {
 				throw new IllegalStateException("Une montagne est existante a cette endroit");
@@ -53,8 +53,8 @@ public class Map {
 	}
 	
 	public boolean isMontain(int x, int y) {
-		if(y<plan.length && x<plan[y].length && x>=0 && y>=0) {
-			if(plan[y][x].isMontain) {
+		if(x<plan.length && x>=0 && y>=0 && y<plan[x].length) {
+			if(plan[x][y].isMontain) {
 				return true;
 			}
 		}
@@ -65,9 +65,9 @@ public class Map {
 	}
 	
 	public boolean removeIfTreasure(int x, int y) {
-		if(y<plan.length && x<plan[y].length && x>=0 && y>=0) {
-			if(!plan[y][x].isMontain && plan[y][x].nbTreasure>0) {
-				plan[y][x].nbTreasure--;
+		if(x<plan.length && x>=0 && y>=0 && y<plan[x].length) {
+			if(!plan[x][y].isMontain && plan[x][y].nbTreasure>0) {
+				plan[x][y].nbTreasure--;
 				return true;
 			}
 		}
@@ -78,9 +78,9 @@ public class Map {
 	}
 	
 	public int moveAdventurer(int oldX, int oldY, int newX, int newY) {
-		
-		if(oldX<plan.length && oldY<plan.length && oldX>=0 && oldY>=0) {
-			if(newX<plan.length && newY<plan.length && newX>=0 && newY>=0) {
+
+		if(oldX<plan.length && oldX>=0 && oldY>=0 && oldY<plan[oldX].length) {
+			if(newX<plan.length  && newX>=0 && newY>=0&& newY<plan[newX].length) {
 				if(plan[oldX][oldY].adventurerIsPresent) {
 					if(!isMontain(newX, newY) && !plan[newX][newY].adventurerIsPresent) {
 						plan[oldX][oldY].adventurerIsPresent = false;
@@ -105,6 +105,20 @@ public class Map {
 		return -1;
 	}
 	
+	public void addAdventurer(int x, int y) {
+		if(x<plan.length && x>=0 && y>=0 && y<plan[x].length) {
+			if(!plan[x][y].isMontain) {
+				plan[x][y].adventurerIsPresent = true;
+			}
+			else {
+				throw new IllegalStateException("Une montagne est presente a ces coordonees");
+			}
+			
+		}
+		else {
+			throw new IllegalArgumentException("Donnée en dehors de la carte");
+		}
+	}
 	
 	class Cell {
 		

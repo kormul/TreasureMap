@@ -77,6 +77,42 @@ public class MapTest {
 		
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
 			Map map = new Map(18,15);
+			map.addMontain(-5, 12);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddMontain_InputXNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addMontain(2, -1);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddMontain_InputYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addMontain(-5, -8);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddMontain_InputXAndYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
 			map.addMontain(25, 40);
 			
 		});
@@ -173,6 +209,42 @@ public class MapTest {
 	}
 	
 	@Test
+	public void AddTreasure_InputXNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addTreasure(2, -1, 2);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddTreasure_InputYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addTreasure(-5, -8, 2);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddTreasure_InputXAndYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addTreasure(-25, -40, 2);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
 	public void AddTreasure_MontainIsAlreadyPresent_ThrowsException() {
 		
 		Exception exception = assertThrows(IllegalStateException.class, () -> {
@@ -226,6 +298,8 @@ public class MapTest {
 
 	}
 	
+	
+	
 	@Test
 	public void IsMontain_InputXOutsideMap_ThrowsException() {
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -254,6 +328,42 @@ public class MapTest {
 			Map map = new Map(18,15);
 			map.isMontain(48, 50);
 
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void IsMontain_InputXNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.isMontain(-2, 1);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void IsMontain_InputYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.isMontain(5, -8);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void IsMontain_InputXAndYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.isMontain(-25, -40);
+			
 		});
 		
 		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
@@ -313,6 +423,42 @@ public class MapTest {
 	}
 	
 	@Test
+	public void RemoveIfTreasure_InputXNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.removeIfTreasure(-2, 1);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void RemoveIfTreasure_InputYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.removeIfTreasure(5, -8);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void RemoveIfTreasure_InputXAndYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.removeIfTreasure(-25, -40);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
 	public void RemoveIfTreasure_ValidInputNobodyTreasure_MethodeSucess() {
 		Map map = new Map(18,15);
 		boolean res = map.removeIfTreasure(2, 8);
@@ -349,6 +495,286 @@ public class MapTest {
 		assertTrue(res);
 		res = map.removeIfTreasure(2, 8);
 		assertFalse(res);
+	}
+	
+	@Test
+	public void MoveAdventurer_InputXOldOutsideMap_ThrowsException() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(50, 2, 6, 6);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputYOldOutsideMap_ThrowsException() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(3, 20, 6, 6);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputXOldAndYOldOutsideMap_ThrowsException() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(50, 20, 6, 6);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputXOldNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(-5, 2, 6, 6);			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputYOldNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(5, -2, 6, 6);			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputXOldAndYOldNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(-6, -8, 6, 6);			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputXNewOutsideMap_ThrowsException() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(8, 2, 64, 6);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputYNewOutsideMap_ThrowsException() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(8, 2, 6, 61);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputXNewAndYNewOutsideMap_ThrowsException() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(8, 2, 26, 36);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputXNewNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(8, 2, -6, 6);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputYNewNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(8, 2, 6, -6);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputXNewAndYNewNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(8, 2, -6, -6);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputNobdyAdventurerIsPresent_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalStateException.class, () -> {
+			Map map = new Map(18,15);
+			map.moveAdventurer(5, 2, 6, 2);
+		});
+		
+		assertTrue(exception.getMessage().equals("Personne n'est présent a ses coordonnées"));
+	}
+	
+	@Test
+	public void MoveAdventurer_InputMontainIsPresent_MethodSucess() {
+		
+		Map map = new Map(18,15);
+		map.addAdventurer(8, 2);
+		map.addMontain(8, 3);
+		int res = map.moveAdventurer(8, 2, 8, 3);
+		
+		assertTrue(res == -1);
+	}
+	
+	@Test
+	public void MoveAdventurer_InputOtherPlayerIsPresent_MethodSucess() {
+		
+		Map map = new Map(18,15);
+		map.addAdventurer(8, 2);
+		map.addAdventurer(8, 3);
+		int res = map.moveAdventurer(8, 2, 8, 3);
+			
+		assertTrue(res == -1);
+	}
+	
+	@Test
+	public void MoveAdventurer_InputNobodyTreasure_MethodSucess() {
+		
+		Map map = new Map(18,15);
+		map.addAdventurer(8, 2);
+		int res = map.moveAdventurer(8, 2, 8, 3);	
+		
+		assertTrue(res == 0);
+	}
+	
+	@Test
+	public void MoveAdventurer_InputOneTreasureIsPresent_MethodSucess() {
+		
+		Map map = new Map(18,15);
+		map.addAdventurer(8, 2);
+		map.addTreasure(8, 3, 1);
+		int res = map.moveAdventurer(8, 2, 8, 3);		
+		
+		assertTrue(res == 1);
+	}
+	
+	@Test
+	public void MoveAdventurer_InputManyTreasureIsPresent_MethodSucess() {
+		
+		Map map = new Map(18,15);
+		map.addAdventurer(8, 2);
+		map.addTreasure(8, 3, 4);
+		int res = map.moveAdventurer(8, 2, 8, 3);
+			
+		assertTrue(res == 1);
+	}
+	
+	@Test
+	public void AddAdventurer_InputXOutsideMap_ThrowsException() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addAdventurer(50, 12);
+
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddAdventurer_InputYOutsideMap_ThrowsException() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addAdventurer(5, 120);
+
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddAdventurer_InputXAndYOutsideMap_ThrowsException() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addAdventurer(50, 52);
+
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddAdventurer_InputXNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addAdventurer(-5, 5);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddAdventurer_InputYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addAdventurer(5, -8);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddAdventurer_InputXAndYNegativeMap_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Map map = new Map(18,15);
+			map.addAdventurer(-25, -40);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée en dehors de la carte"));
+	}
+	
+	@Test
+	public void AddAdventurer_InputMontainIsPresent_ThrowsException() {
+		
+		Exception exception = assertThrows(IllegalStateException.class, () -> {
+			Map map = new Map(18,15);
+			map.addMontain(2, 5);
+			map.addAdventurer(2, 5);
+			
+		});
+		
+		assertTrue(exception.getMessage().equals("Une montagne est presente a ces coordonees"));
+	}
+	
+	@Test
+	public void AddAdventurer_InputValid_MethodSuccess() {
+		Map map = new Map(18,15);
+		map.addAdventurer(2, 5);
+			
 	}
 	
 }
