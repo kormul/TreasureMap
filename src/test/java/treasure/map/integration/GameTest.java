@@ -21,22 +21,18 @@ public class GameTest {
 	@Test
 	public void AddAdventurer_ValidInput_MethodSuccess() {
 		Game game = new Game(new Map(18,30));
-		Adventurer adventurer = new Adventurer("Alric", 5, 6, Orientation.East, "AAG");
-		game.addAdventurer(adventurer);
+		new Adventurer("Alric", 5, 6, Orientation.East, "AAG");
 		assertTrue(game.getMap() != null);
 		assertTrue(game.getAdventurers().size() == 1);
-		Adventurer adventurer2 = new Adventurer("Fred", 8, 7, Orientation.South, "DAG");
-		game.addAdventurer(adventurer2);
+		new Adventurer("Fred", 8, 7, Orientation.South, "DAG");
 		assertTrue(game.getAdventurers().size() == 2);
 	}
 	
 	@Test
 	public void Play_ValidInputNoTreasure_MethodSuccess() {
 		Game game = new Game(new Map(18,30));
-		Adventurer adventurer = new Adventurer("Alric", 5, 6, Orientation.East, "AAG");
-		game.addAdventurer(adventurer);
-		Adventurer adventurer2 = new Adventurer("Fred", 8, 7, Orientation.South, "DAG");
-		game.addAdventurer(adventurer2);
+		new Adventurer("Alric", 5, 6, Orientation.East, "AAG");
+		new Adventurer("Fred", 8, 7, Orientation.South, "DAG");
 		game.play();
 		assertTrue(game.getAdventurers().get(0).getNbTreasure() == 0);
 		assertTrue(game.getAdventurers().get(1).getNbTreasure() == 0);
@@ -50,8 +46,7 @@ public class GameTest {
 		Game.game.getMap().addTreasure(1, 2, 1);
 		Game.game.getMap().addTreasure(2, 1, 1);
 
-		Adventurer adventurer = new Adventurer("Alric", 1, 0, Orientation.South, "AADAGAGAAGAA");
-		game.addAdventurer(adventurer);
+		new Adventurer("Alric", 1, 0, Orientation.South, "AADAGAGAAGAA");
 		game.play();
 		System.out.println(game.getAdventurers().get(0).getNbTreasure());
 		assertTrue(game.getAdventurers().get(0).getNbTreasure() == 2);

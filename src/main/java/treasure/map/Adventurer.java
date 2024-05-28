@@ -23,6 +23,7 @@ public class Adventurer {
 		this.sequence = sequence;
 		this.nbTreasure = 0;
 		Game.game.getMap().addAdventurer(x, y);
+		Game.game.addAdventurer(this);
 	}
 	
 	public boolean nextSequence(int tour) {
