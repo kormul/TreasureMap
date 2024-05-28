@@ -1,6 +1,10 @@
 package treasure.map.integration;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,8 +52,137 @@ public class GameTest {
 
 		new Adventurer("Alric", 1, 0, Orientation.South, "AADAGAGAAGAA");
 		game.play();
-		System.out.println(game.getAdventurers().get(0).getNbTreasure());
 		assertTrue(game.getAdventurers().get(0).getNbTreasure() == 2);
 
+	}
+	
+	@Test
+	public void InitGame_ValidCompleteData_MethodSuccess() {
+		List<String> data= new ArrayList<>();
+		data.add("C-15-20");
+		data.add("M-5-4");
+		data.add("T-3-2-1");
+		data.add("A-Croft-1-2-S-AAGADAGA");
+		Game.initGame(data);
+		assertTrue(Game.game.getAdventurers().get(0).getName().equals("Croft"));
+		assertTrue(Game.game.getAdventurers().get(0).getNbTreasure() == 0);
+		assertTrue(Game.game.getAdventurers().get(0).getPositionX() == 1);
+		assertTrue(Game.game.getAdventurers().get(0).getPositionY() == 2);
+		assertTrue(Game.game.getAdventurers().get(0).getOrientation().equals(Orientation.South));
+		assertTrue(Game.game.getAdventurers().get(0).getSequence().equals("AAGADAGA"));
+	}
+	
+	@Test
+	public void InitGame_FirstLineErreur_ThrowsException() {
+
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			List<String> data= new ArrayList<>();
+			data.add("M-15-20");
+			data.add("C-5-4");
+			data.add("T-3-2-1");
+			data.add("A-Croft-1-2-S-AAGADAGA");
+			Game.initGame(data);
+		});
+		
+		assertTrue(exception.getMessage().equals("Le fichie ne commence pas par la taille de la carte !"));
+	}
+	
+	@Test
+	public void InitGame_FirstLineDataCorrupt_ThrowsException() {
+
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			List<String> data= new ArrayList<>();
+			data.add("C-15");
+			data.add("M-5-4");
+			data.add("T-3-2-1");
+			data.add("A-Croft-1-2-S-AAGADAGA");
+			Game.initGame(data);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée Invalide"));
+	}
+	
+	@Test
+	public void InitGame_MontainDataCorrupt_ThrowsException() {
+
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			List<String> data= new ArrayList<>();
+			data.add("C-15-30");
+			data.add("M-4");
+			data.add("T-3-2-1");
+			data.add("A-Croft-1-2-S-AAGADAGA");
+			Game.initGame(data);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée Invalide"));
+	}
+	
+	@Test
+	public void InitGame_TreasureDataCorrupt_ThrowsException() {
+
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			List<String> data= new ArrayList<>();
+			data.add("C-15-30");
+			data.add("M-4-5");
+			data.add("T-3");
+			data.add("A-Croft-1-2-S-AAGADAGA");
+			Game.initGame(data);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée Invalide"));
+	}
+	
+	@Test
+	public void InitGame_AdventurerDataCorrupt_ThrowsException() {
+
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			List<String> data= new ArrayList<>();
+			data.add("C-15-30");
+			data.add("M-4-5");
+			data.add("A-Croft-1-2");
+			Game.initGame(data);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée Invalide"));
+	}
+	
+	@Test
+	public void InitGame_UnknowData_ThrowsException() {
+
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			List<String> data= new ArrayList<>();
+			data.add("C-15-30");
+			data.add("G-4-5");
+			data.add("A-Croft-1-2");
+			Game.initGame(data);
+		});
+		
+		assertTrue(exception.getMessage().equals("Donnée Inconnue"));
+	}
+	
+	@Test
+	public void Resultat_ValidData_MethodSuccess() {
+
+		List<String> data= new ArrayList<>();
+		data.add("C-3-4");
+		data.add("M-1-0");
+		data.add("M-2-1");
+		data.add("T-0-3-2");
+		data.add("T-1-3-3");
+		data.add("A-Lara-1-1-S-AADADAGGA");
+		Game.initGame(data);
+		Game.game.play();
+		String res = Game.resultat();
+		assertTrue(res.equals("C - 3 - 4\r\n"
+					+ "M - 1 - 0\r\n"
+					+ "M - 2 - 1\r\n"
+					+ "T - 1 - 3 - 2\r\n"
+					+ "A - Lara - 0 - 3 - S - 3"));
 	}
 }

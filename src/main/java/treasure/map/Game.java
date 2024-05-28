@@ -83,17 +83,10 @@ public class Game {
 					if(data.length!=6) {
 						throw new IllegalArgumentException("Donnée Invalide");
 					}
-					new Adventurer(data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]), Orientation.valueOf(data[4]), data[5]);
+					new Adventurer(data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]), Orientation.fromString(data[4]), data[5]);
 					break;
 				default:
-					break;
-			}
-			if(line.startsWith("C"))
-			{
-				if(data.length!=3) {
-					throw new IllegalArgumentException("Donnée Invalide");
-				}
-				new Game(new Map(Integer.parseInt(data[1]), Integer.parseInt(data[2])));
+					throw new IllegalArgumentException("Donnée Inconnue");
 			}
 			
 		}
